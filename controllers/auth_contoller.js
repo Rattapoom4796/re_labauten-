@@ -7,10 +7,10 @@ dotenv.config();
 //REGISTER 
 
 exports.register = async (req,res) =>{
-    const {user_name, password} = req.body;
+    const {user_name, password,Name, role} = req.body;
     try{
         const hashedPasswor = await bcrypt.hash(password, 10);
-        const user = new User ({user_name, password: hashedPasswor});
+        const user = new User ({user_name, role,Name,password: hashedPasswor});
         await user.save();
         res.status(201).send("User registered");
     }catch (err){
